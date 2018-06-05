@@ -21,6 +21,14 @@
 // STL includes
 #include <fstream>
 
+#define EPSILON 0.0001
+
+//-----------------------------------------------------------------------------
+bool AreSame(double a, double b)
+{
+  return fabs(a - b) < EPSILON;
+}
+
 //-----------------------------------------------------------------------------
 int vtkSlicerPointToLineRegistrationLogicTest1(int argc, char* argv [])
 {
@@ -30,9 +38,9 @@ int vtkSlicerPointToLineRegistrationLogicTest1(int argc, char* argv [])
     return EXIT_FAILURE;
   }
 
-  vtkMRMLScene* scene = vtkMRMLScene::New();
+  vtkNew<vtkMRMLScene> scene;
 
-  vtkSlicerPointToLineRegistrationLogic* moduleLogic = vtkSlicerPointToLineRegistrationLogic::New();
+  vtkNew<vtkSlicerPointToLineRegistrationLogic> moduleLogic;
   moduleLogic->SetMRMLScene(scene);
   if (moduleLogic->GetMRMLScene() != scene)
   {
@@ -91,15 +99,20 @@ int vtkSlicerPointToLineRegistrationLogicTest1(int argc, char* argv [])
   vtkMatrix4x4* calculatedResult;
   calculatedResult = moduleLogic->CalculateRegistration();
 
-  if (calculatedResult != goldStandard)
+  for (int i = 0; i < 16; ++i)
   {
-    std::cerr << "Matrices do not match." << std::endl;
-    return EXIT_FAILURE;
+    if (!AreSame(calculatedResult->GetData()[i], goldStandard->GetData()[i]))
+    {
+      std::cerr << "Matrices do not match." << std::endl << std::endl;
+      std::cerr << "Calculated: " << std::endl;
+      calculatedResult->PrintSelf(std::cerr, vtkIndent());
+      std::cerr << std::endl << "Reference: " << std::endl;
+      goldStandard->PrintSelf(std::cerr, vtkIndent());
+      calculatedResult->Delete();
+      return EXIT_FAILURE;
+    }
   }
 
   calculatedResult->Delete();
-  moduleLogic->Delete();
-  scene->Delete();
-
   return EXIT_SUCCESS;
 }
