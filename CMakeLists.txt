@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(VASSTRegistrationAlgo)
+project(VASSTRegistration)
 
 #-----------------------------------------------------------------------------
 # Extension meta-information
