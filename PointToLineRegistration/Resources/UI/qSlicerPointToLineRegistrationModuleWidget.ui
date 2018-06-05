@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>qSlicerCalibrationAlgoModuleWidget</class>
- <widget class="qSlicerWidget" name="qSlicerCalibrationAlgoModuleWidget">
+ <class>qSlicerPointToLineRegistrationModuleWidget</class>
+ <widget class="qSlicerWidget" name="qSlicerPointToLineRegistrationModuleWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

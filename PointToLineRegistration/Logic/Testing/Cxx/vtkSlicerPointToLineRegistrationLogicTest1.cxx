@@ -10,7 +10,7 @@
 =========================================================================auto=*/
 
 // Logic includes
-#include "vtkSlicerCalibrationAlgoLogic.h"
+#include "vtkSlicerPointToLineRegistrationLogic.h"
 
 // MRML includes
 #include "vtkMRMLScene.h"
@@ -22,7 +22,7 @@
 #include <fstream>
 
 //-----------------------------------------------------------------------------
-int vtkSlicerCalibrationAlgoLogicTest1(int argc, char* argv [])
+int vtkSlicerPointToLineRegistrationLogicTest1(int argc, char* argv [])
 {
   if (argc < 2)
   {
@@ -32,7 +32,7 @@ int vtkSlicerCalibrationAlgoLogicTest1(int argc, char* argv [])
 
   vtkMRMLScene* scene = vtkMRMLScene::New();
 
-  vtkSlicerCalibrationAlgoLogic* moduleLogic = vtkSlicerCalibrationAlgoLogic::New();
+  vtkSlicerPointToLineRegistrationLogic* moduleLogic = vtkSlicerPointToLineRegistrationLogic::New();
   moduleLogic->SetMRMLScene(scene);
   if (moduleLogic->GetMRMLScene() != scene)
   {

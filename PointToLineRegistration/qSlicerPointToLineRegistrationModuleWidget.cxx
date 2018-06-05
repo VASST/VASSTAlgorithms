@@ -19,44 +19,44 @@
 #include <QDebug>
 
 // SlicerQt includes
-#include "qSlicerCalibrationAlgoModuleWidget.h"
-#include "ui_qSlicerCalibrationAlgoModuleWidget.h"
+#include "qSlicerPointToLineRegistrationModuleWidget.h"
+#include "ui_qSlicerPointToLineRegistrationModuleWidget.h"
 
 //-----------------------------------------------------------------------------
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class qSlicerCalibrationAlgoModuleWidgetPrivate: public Ui_qSlicerCalibrationAlgoModuleWidget
+class qSlicerPointToLineRegistrationModuleWidgetPrivate: public Ui_qSlicerPointToLineRegistrationModuleWidget
 {
 public:
-  qSlicerCalibrationAlgoModuleWidgetPrivate();
+  qSlicerPointToLineRegistrationModuleWidgetPrivate();
 };
 
 //-----------------------------------------------------------------------------
-// qSlicerCalibrationAlgoModuleWidgetPrivate methods
+// qSlicerPointToLineRegistrationModuleWidgetPrivate methods
 
 //-----------------------------------------------------------------------------
-qSlicerCalibrationAlgoModuleWidgetPrivate::qSlicerCalibrationAlgoModuleWidgetPrivate()
+qSlicerPointToLineRegistrationModuleWidgetPrivate::qSlicerPointToLineRegistrationModuleWidgetPrivate()
 {
 }
 
 //-----------------------------------------------------------------------------
-// qSlicerCalibrationAlgoModuleWidget methods
+// qSlicerPointToLineRegistrationModuleWidget methods
 
 //-----------------------------------------------------------------------------
-qSlicerCalibrationAlgoModuleWidget::qSlicerCalibrationAlgoModuleWidget(QWidget* _parent)
+qSlicerPointToLineRegistrationModuleWidget::qSlicerPointToLineRegistrationModuleWidget(QWidget* _parent)
   : Superclass(_parent)
-  , d_ptr(new qSlicerCalibrationAlgoModuleWidgetPrivate)
+  , d_ptr(new qSlicerPointToLineRegistrationModuleWidgetPrivate)
 {
 }
 
 //-----------------------------------------------------------------------------
-qSlicerCalibrationAlgoModuleWidget::~qSlicerCalibrationAlgoModuleWidget()
+qSlicerPointToLineRegistrationModuleWidget::~qSlicerPointToLineRegistrationModuleWidget()
 {
 }
 
 //-----------------------------------------------------------------------------
-void qSlicerCalibrationAlgoModuleWidget::setup()
+void qSlicerPointToLineRegistrationModuleWidget::setup()
 {
-  Q_D(qSlicerCalibrationAlgoModuleWidget);
+  Q_D(qSlicerPointToLineRegistrationModuleWidget);
   d->setupUi(this);
   this->Superclass::setup();
 }

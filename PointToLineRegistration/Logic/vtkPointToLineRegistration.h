@@ -37,12 +37,12 @@ class vtkVector3d;
 #include <vtkLandmarkTransform.h>
 
 // Local includes
-#include "vtkSlicerCalibrationAlgoModuleLogicExport.h"
+#include "vtkSlicerPointToLineRegistrationModuleLogicExport.h"
 
 // STL includes
 #include <vector>
 
-class VTK_SLICER_CALIBRATIONALGO_MODULE_LOGIC_EXPORT vtkPointToLineRegistration : public vtkObject
+class VTK_SLICER_POINTTOLINEREGISTRATION_MODULE_LOGIC_EXPORT vtkPointToLineRegistration : public vtkObject
 {
   typedef std::pair<vtkVector3d, vtkVector3d> Line;
 

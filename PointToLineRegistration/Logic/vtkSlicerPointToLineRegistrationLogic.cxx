@@ -15,8 +15,8 @@
 
 ==============================================================================*/
 
-// CalibrationAlgo Logic includes
-#include "vtkSlicerCalibrationAlgoLogic.h"
+// PointToLineRegistration Logic includes
+#include "vtkSlicerPointToLineRegistrationLogic.h"
 #include "vtkPointToLineRegistration.h"
 
 // MRML includes
@@ -31,94 +31,94 @@
 #include <cassert>
 
 //----------------------------------------------------------------------------
-vtkStandardNewMacro(vtkSlicerCalibrationAlgoLogic);
+vtkStandardNewMacro(vtkSlicerPointToLineRegistrationLogic);
 
 //----------------------------------------------------------------------------
-vtkSlicerCalibrationAlgoLogic::vtkSlicerCalibrationAlgoLogic()
+vtkSlicerPointToLineRegistrationLogic::vtkSlicerPointToLineRegistrationLogic()
   : PointToLineRegistration(vtkSmartPointer<vtkPointToLineRegistration>::New())
 {
 }
 
 //----------------------------------------------------------------------------
-vtkSlicerCalibrationAlgoLogic::~vtkSlicerCalibrationAlgoLogic()
+vtkSlicerPointToLineRegistrationLogic::~vtkSlicerPointToLineRegistrationLogic()
 {
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::PrintSelf(ostream& os, vtkIndent indent)
+void vtkSlicerPointToLineRegistrationLogic::PrintSelf(ostream& os, vtkIndent indent)
 {
   this->Superclass::PrintSelf(os, indent);
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::AddPointAndLine(double point[3], double lineOrigin[3], double lineDirection[3])
+void vtkSlicerPointToLineRegistrationLogic::AddPointAndLine(double point[3], double lineOrigin[3], double lineDirection[3])
 {
   this->PointToLineRegistration->AddPoint(point[0], point[1], point[2]);
   PointToLineRegistration->AddLine(lineOrigin[0], lineOrigin[1], lineOrigin[2], lineDirection[0], lineDirection[1], lineDirection[2]);
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::Reset()
+void vtkSlicerPointToLineRegistrationLogic::Reset()
 {
   this->PointToLineRegistration->Reset();
 }
 
 //----------------------------------------------------------------------------
-vtkMatrix4x4* vtkSlicerCalibrationAlgoLogic::CalculateRegistration()
+vtkMatrix4x4* vtkSlicerPointToLineRegistrationLogic::CalculateRegistration()
 {
   return this->PointToLineRegistration->Compute();
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::SetTolerance(double arg)
+void vtkSlicerPointToLineRegistrationLogic::SetTolerance(double arg)
 {
   this->PointToLineRegistration->SetTolerance(arg);
 }
 
 //----------------------------------------------------------------------------
-double vtkSlicerCalibrationAlgoLogic::GetTolerance() const
+double vtkSlicerPointToLineRegistrationLogic::GetTolerance() const
 {
   return this->PointToLineRegistration->GetTolerance();
 }
 
 //----------------------------------------------------------------------------
-unsigned int vtkSlicerCalibrationAlgoLogic::GetCount() const
+unsigned int vtkSlicerPointToLineRegistrationLogic::GetCount() const
 {
   return this->PointToLineRegistration->GetCount();
 }
 
 //----------------------------------------------------------------------------
-double vtkSlicerCalibrationAlgoLogic::GetError() const
+double vtkSlicerPointToLineRegistrationLogic::GetError() const
 {
   return this->PointToLineRegistration->GetError();
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::SetLandmarkRegistrationMode(int arg)
+void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationMode(int arg)
 {
   this->PointToLineRegistration->SetLandmarkRegistrationMode(arg);
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::SetLandmarkRegistrationModeToRigidBody()
+void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToRigidBody()
 {
   this->PointToLineRegistration->SetLandmarkRegistrationModeToRigidBody();
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::SetLandmarkRegistrationModeToAffine()
+void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToAffine()
 {
   this->PointToLineRegistration->SetLandmarkRegistrationModeToAffine();
 }
 
 //----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::SetLandmarkRegistrationModeToSimilarity()
+void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToSimilarity()
 {
   this->PointToLineRegistration->SetLandmarkRegistrationModeToSimilarity();
 }
 
 //---------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::SetMRMLSceneInternal(vtkMRMLScene* newScene)
+void vtkSlicerPointToLineRegistrationLogic::SetMRMLSceneInternal(vtkMRMLScene* newScene)
 {
   vtkNew<vtkIntArray> events;
   events->InsertNextValue(vtkMRMLScene::NodeAddedEvent);
@@ -128,25 +128,25 @@ void vtkSlicerCalibrationAlgoLogic::SetMRMLSceneInternal(vtkMRMLScene* newScene)
 }
 
 //-----------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::RegisterNodes()
+void vtkSlicerPointToLineRegistrationLogic::RegisterNodes()
 {
   assert(this->GetMRMLScene() != 0);
 }
 
 //---------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic::UpdateFromMRMLScene()
+void vtkSlicerPointToLineRegistrationLogic::UpdateFromMRMLScene()
 {
   assert(this->GetMRMLScene() != 0);
 }
 
 //---------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic
+void vtkSlicerPointToLineRegistrationLogic
 ::OnMRMLSceneNodeAdded(vtkMRMLNode* vtkNotUsed(node))
 {
 }
 
 //---------------------------------------------------------------------------
-void vtkSlicerCalibrationAlgoLogic
+void vtkSlicerPointToLineRegistrationLogic
 ::OnMRMLSceneNodeRemoved(vtkMRMLNode* vtkNotUsed(node))
 {
 }

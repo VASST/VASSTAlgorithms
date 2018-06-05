@@ -15,14 +15,14 @@
 
 ==============================================================================*/
 
-// .NAME vtkSlicerCalibrationAlgoLogic - slicer logic class for volumes manipulation
+// .NAME vtkSlicerPointToLineRegistrationLogic - slicer logic class for volumes manipulation
 // .SECTION Description
 // This class manages the logic associated with reading, saving,
 // and changing propertied of the volumes
 
 
-#ifndef __vtkSlicerCalibrationAlgoLogic_h
-#define __vtkSlicerCalibrationAlgoLogic_h
+#ifndef __vtkSlicerPointToLineRegistrationLogic_h
+#define __vtkSlicerPointToLineRegistrationLogic_h
 
 // Slicer includes
 #include "vtkSlicerModuleLogic.h"
@@ -35,18 +35,18 @@
 // VTK includes
 #include <vtkSmartPointer.h>
 
-#include "vtkSlicerCalibrationAlgoModuleLogicExport.h"
+#include "vtkSlicerPointToLineRegistrationModuleLogicExport.h"
 
 class vtkPointToLineRegistration;
 class vtkMatrix4x4;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class VTK_SLICER_CALIBRATIONALGO_MODULE_LOGIC_EXPORT vtkSlicerCalibrationAlgoLogic :
+class VTK_SLICER_POINTTOLINEREGISTRATION_MODULE_LOGIC_EXPORT vtkSlicerPointToLineRegistrationLogic :
   public vtkSlicerModuleLogic
 {
 public:
-  static vtkSlicerCalibrationAlgoLogic* New();
-  vtkTypeMacro(vtkSlicerCalibrationAlgoLogic, vtkSlicerModuleLogic);
+  static vtkSlicerPointToLineRegistrationLogic* New();
+  vtkTypeMacro(vtkSlicerPointToLineRegistrationLogic, vtkSlicerModuleLogic);
   void PrintSelf(ostream& os, vtkIndent indent);
 
   void AddPointAndLine(double point[3], double lineOrigin[3], double lineDirection[3]);
@@ -65,8 +65,8 @@ public:
   void SetLandmarkRegistrationModeToSimilarity();
 
 protected:
-  vtkSlicerCalibrationAlgoLogic();
-  virtual ~vtkSlicerCalibrationAlgoLogic();
+  vtkSlicerPointToLineRegistrationLogic();
+  virtual ~vtkSlicerPointToLineRegistrationLogic();
 
   virtual void SetMRMLSceneInternal(vtkMRMLScene* newScene);
   /// Register MRML Node classes to Scene. Gets called automatically when the MRMLScene is attached to this logic class.
@@ -78,8 +78,8 @@ protected:
   vtkSmartPointer<vtkPointToLineRegistration> PointToLineRegistration;
 
 private:
-  vtkSlicerCalibrationAlgoLogic(const vtkSlicerCalibrationAlgoLogic&); // Not implemented
-  void operator=(const vtkSlicerCalibrationAlgoLogic&); // Not implemented
+  vtkSlicerPointToLineRegistrationLogic(const vtkSlicerPointToLineRegistrationLogic&); // Not implemented
+  void operator=(const vtkSlicerPointToLineRegistrationLogic&); // Not implemented
 };
 
 #endif

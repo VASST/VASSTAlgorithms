@@ -15,65 +15,65 @@
 
 ==============================================================================*/
 
-// CalibrationAlgo Logic includes
-#include <vtkSlicerCalibrationAlgoLogic.h>
+// PointToLineRegistration Logic includes
+#include <vtkSlicerPointToLineRegistrationLogic.h>
 
-// CalibrationAlgo includes
-#include "qSlicerCalibrationAlgoModule.h"
-#include "qSlicerCalibrationAlgoModuleWidget.h"
+// PointToLineRegistration includes
+#include "qSlicerPointToLineRegistrationModule.h"
+#include "qSlicerPointToLineRegistrationModuleWidget.h"
 
 //-----------------------------------------------------------------------------
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
   #include <QtPlugin>
-  Q_EXPORT_PLUGIN2(qSlicerCalibrationAlgoModule, qSlicerCalibrationAlgoModule);
+  Q_EXPORT_PLUGIN2(qSlicerPointToLineRegistrationModule, qSlicerPointToLineRegistrationModule);
 #endif
 
 //-----------------------------------------------------------------------------
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class qSlicerCalibrationAlgoModulePrivate
+class qSlicerPointToLineRegistrationModulePrivate
 {
 public:
-  qSlicerCalibrationAlgoModulePrivate();
+  qSlicerPointToLineRegistrationModulePrivate();
 };
 
 //-----------------------------------------------------------------------------
-// qSlicerCalibrationAlgoModulePrivate methods
+// qSlicerPointToLineRegistrationModulePrivate methods
 
 //-----------------------------------------------------------------------------
-qSlicerCalibrationAlgoModulePrivate::qSlicerCalibrationAlgoModulePrivate()
+qSlicerPointToLineRegistrationModulePrivate::qSlicerPointToLineRegistrationModulePrivate()
 {
 }
 
 //-----------------------------------------------------------------------------
-// qSlicerCalibrationAlgoModule methods
+// qSlicerPointToLineRegistrationModule methods
 
 //-----------------------------------------------------------------------------
-qSlicerCalibrationAlgoModule::qSlicerCalibrationAlgoModule(QObject* _parent)
+qSlicerPointToLineRegistrationModule::qSlicerPointToLineRegistrationModule(QObject* _parent)
   : Superclass(_parent)
-  , d_ptr(new qSlicerCalibrationAlgoModulePrivate)
+  , d_ptr(new qSlicerPointToLineRegistrationModulePrivate)
 {
   this->setWidgetRepresentationCreationEnabled(false);
 }
 
 //-----------------------------------------------------------------------------
-qSlicerCalibrationAlgoModule::~qSlicerCalibrationAlgoModule()
+qSlicerPointToLineRegistrationModule::~qSlicerPointToLineRegistrationModule()
 {
 }
 
 //-----------------------------------------------------------------------------
-QString qSlicerCalibrationAlgoModule::helpText() const
+QString qSlicerPointToLineRegistrationModule::helpText() const
 {
   return "This is a hidden loadable module that contains a point to line registration algorithm";
 }
 
 //-----------------------------------------------------------------------------
-QString qSlicerCalibrationAlgoModule::acknowledgementText() const
+QString qSlicerPointToLineRegistrationModule::acknowledgementText() const
 {
   return "The algorithm was written by Elvis Chen (Robarts Research Institute). This extention was created by Leah Groves (Robarts Research Institute), with help from Adam Rankin (Robarts Research Institute)";
 }
 
 //-----------------------------------------------------------------------------
-QStringList qSlicerCalibrationAlgoModule::contributors() const
+QStringList qSlicerPointToLineRegistrationModule::contributors() const
 {
   QStringList moduleContributors;
   moduleContributors << QString("Elvis Chen (Robarts Research Intitute)")
@@ -84,38 +84,38 @@ QStringList qSlicerCalibrationAlgoModule::contributors() const
 }
 
 //-----------------------------------------------------------------------------
-QIcon qSlicerCalibrationAlgoModule::icon() const
+QIcon qSlicerPointToLineRegistrationModule::icon() const
 {
-  return QIcon(":/Icons/CalibrationAlgo.png");
+  return QIcon(":/Icons/PointToLineRegistration.png");
 }
 
 //-----------------------------------------------------------------------------
-QStringList qSlicerCalibrationAlgoModule::categories() const
+QStringList qSlicerPointToLineRegistrationModule::categories() const
 {
   return QStringList() << "IGT";
 }
 
 //-----------------------------------------------------------------------------
-QStringList qSlicerCalibrationAlgoModule::dependencies() const
+QStringList qSlicerPointToLineRegistrationModule::dependencies() const
 {
   return QStringList();
 }
 
 //-----------------------------------------------------------------------------
-void qSlicerCalibrationAlgoModule::setup()
+void qSlicerPointToLineRegistrationModule::setup()
 {
   this->Superclass::setup();
 }
 
 //-----------------------------------------------------------------------------
-qSlicerAbstractModuleRepresentation* qSlicerCalibrationAlgoModule
+qSlicerAbstractModuleRepresentation* qSlicerPointToLineRegistrationModule
 ::createWidgetRepresentation()
 {
-  return new qSlicerCalibrationAlgoModuleWidget;
+  return new qSlicerPointToLineRegistrationModuleWidget;
 }
 
 //-----------------------------------------------------------------------------
-vtkMRMLAbstractLogic* qSlicerCalibrationAlgoModule::createLogic()
+vtkMRMLAbstractLogic* qSlicerPointToLineRegistrationModule::createLogic()
 {
-  return vtkSlicerCalibrationAlgoLogic::New();
+  return vtkSlicerPointToLineRegistrationLogic::New();
 }

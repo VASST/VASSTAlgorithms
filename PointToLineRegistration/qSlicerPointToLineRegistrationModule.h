@@ -15,19 +15,19 @@
 
 ==============================================================================*/
 
-#ifndef __qSlicerCalibrationAlgoModule_h
-#define __qSlicerCalibrationAlgoModule_h
+#ifndef __qSlicerPointToLineRegistrationModule_h
+#define __qSlicerPointToLineRegistrationModule_h
 
 // SlicerQt includes
 #include "qSlicerLoadableModule.h"
 
-#include "qSlicerCalibrationAlgoModuleExport.h"
+#include "qSlicerPointToLineRegistrationModuleExport.h"
 
-class qSlicerCalibrationAlgoModulePrivate;
+class qSlicerPointToLineRegistrationModulePrivate;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class Q_SLICER_QTMODULES_CALIBRATIONALGO_EXPORT
-  qSlicerCalibrationAlgoModule
+class Q_SLICER_QTMODULES_POINTTOLINEREGISTRATION_EXPORT
+  qSlicerPointToLineRegistrationModule
   : public qSlicerLoadableModule
 {
   Q_OBJECT
@@ -39,8 +39,8 @@ class Q_SLICER_QTMODULES_CALIBRATIONALGO_EXPORT
 public:
 
   typedef qSlicerLoadableModule Superclass;
-  explicit qSlicerCalibrationAlgoModule(QObject* parent = 0);
-  virtual ~qSlicerCalibrationAlgoModule();
+  explicit qSlicerPointToLineRegistrationModule(QObject* parent = 0);
+  virtual ~qSlicerPointToLineRegistrationModule();
 
   qSlicerGetTitleMacro(QTMODULE_TITLE);
 
@@ -65,11 +65,11 @@ protected:
   virtual vtkMRMLAbstractLogic* createLogic();
 
 protected:
-  QScopedPointer<qSlicerCalibrationAlgoModulePrivate> d_ptr;
+  QScopedPointer<qSlicerPointToLineRegistrationModulePrivate> d_ptr;
 
 private:
-  Q_DECLARE_PRIVATE(qSlicerCalibrationAlgoModule);
-  Q_DISABLE_COPY(qSlicerCalibrationAlgoModule);
+  Q_DECLARE_PRIVATE(qSlicerPointToLineRegistrationModule);
+  Q_DISABLE_COPY(qSlicerPointToLineRegistrationModule);
 
 };
 

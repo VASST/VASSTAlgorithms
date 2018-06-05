@@ -15,19 +15,19 @@
 
 ==============================================================================*/
 
-#ifndef __qSlicerCalibrationAlgoModuleWidget_h
-#define __qSlicerCalibrationAlgoModuleWidget_h
+#ifndef __qSlicerPointToLineRegistrationModuleWidget_h
+#define __qSlicerPointToLineRegistrationModuleWidget_h
 
 // SlicerQt includes
 #include "qSlicerAbstractModuleWidget.h"
 
-#include "qSlicerCalibrationAlgoModuleExport.h"
+#include "qSlicerPointToLineRegistrationModuleExport.h"
 
-class qSlicerCalibrationAlgoModuleWidgetPrivate;
+class qSlicerPointToLineRegistrationModuleWidgetPrivate;
 class vtkMRMLNode;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class Q_SLICER_QTMODULES_CALIBRATIONALGO_EXPORT qSlicerCalibrationAlgoModuleWidget :
+class Q_SLICER_QTMODULES_POINTTOLINEREGISTRATION_EXPORT qSlicerPointToLineRegistrationModuleWidget :
   public qSlicerAbstractModuleWidget
 {
   Q_OBJECT
@@ -35,20 +35,20 @@ class Q_SLICER_QTMODULES_CALIBRATIONALGO_EXPORT qSlicerCalibrationAlgoModuleWidg
 public:
 
   typedef qSlicerAbstractModuleWidget Superclass;
-  qSlicerCalibrationAlgoModuleWidget(QWidget* parent = 0);
-  virtual ~qSlicerCalibrationAlgoModuleWidget();
+  qSlicerPointToLineRegistrationModuleWidget(QWidget* parent = 0);
+  virtual ~qSlicerPointToLineRegistrationModuleWidget();
 
 public slots:
 
 
 protected:
-  QScopedPointer<qSlicerCalibrationAlgoModuleWidgetPrivate> d_ptr;
+  QScopedPointer<qSlicerPointToLineRegistrationModuleWidgetPrivate> d_ptr;
 
   virtual void setup();
 
 private:
-  Q_DECLARE_PRIVATE(qSlicerCalibrationAlgoModuleWidget);
-  Q_DISABLE_COPY(qSlicerCalibrationAlgoModuleWidget);
+  Q_DECLARE_PRIVATE(qSlicerPointToLineRegistrationModuleWidget);
+  Q_DISABLE_COPY(qSlicerPointToLineRegistrationModuleWidget);
 };
 
 #endif

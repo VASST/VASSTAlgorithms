@@ -4,7 +4,7 @@ set(DATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Data)
 
 #-----------------------------------------------------------------------------
 set(KIT_TEST_SRCS
-  vtkSlicerCalibrationAlgoLogicTest1.cxx
+  vtkSlicerPointToLineRegistrationLogicTest1.cxx
   )
 
 #-----------------------------------------------------------------------------
@@ -16,4 +16,4 @@ slicerMacroConfigureModuleCxxTestDriver(
   )
 
 #-----------------------------------------------------------------------------
-simple_test( vtkSlicerCalibrationAlgoLogicTest1 ${DATA_DIR}/point_to_line_sample.txt)
+simple_test( vtkSlicerPointToLineRegistrationLogicTest1 ${DATA_DIR}/point_to_line_sample.txt)
