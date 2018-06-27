@@ -155,7 +155,7 @@ vtkMatrix4x4* vtkPointToLineRegistration::Compute()
   vtkMatrix4x4* matrix = vtkMatrix4x4::New();
   matrix->Identity();
 
-  if (this->Points.size() != this->Lines.size())
+  if (this->Points.size() != this->Lines.size() || this->Points.size() < 3)
   {
     return matrix;
   }
