@@ -1,5 +1,5 @@
-# VASSTRegistrationAlgo
-Slicer extension containing registration library functions
+# VASSTAlgorithms
+Slicer extension containing a number of algorithms for algebra, geometry, registration, and other library functions
 
 Available modules
 -----------------
