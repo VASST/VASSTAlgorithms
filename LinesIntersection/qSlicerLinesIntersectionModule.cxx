@@ -15,106 +15,105 @@
 
 ==============================================================================*/
 
-// PointToLineRegistration Logic includes
-#include <vtkSlicerPointToLineRegistrationLogic.h>
+// LinesIntersection Logic includes
+#include <vtkSlicerLinesIntersectionLogic.h>
 
-// PointToLineRegistration includes
-#include "qSlicerPointToLineRegistrationModule.h"
-#include "qSlicerPointToLineRegistrationModuleWidget.h"
+// LinesIntersection includes
+#include "qSlicerLinesIntersectionModule.h"
+#include "qSlicerLinesIntersectionModuleWidget.h"
 
 //-----------------------------------------------------------------------------
 #if (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
-  #include <QtPlugin>
-  Q_EXPORT_PLUGIN2(qSlicerPointToLineRegistrationModule, qSlicerPointToLineRegistrationModule);
+#include <QtPlugin>
+Q_EXPORT_PLUGIN2(qSlicerLinesIntersectionModule, qSlicerLinesIntersectionModule);
 #endif
 
 //-----------------------------------------------------------------------------
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class qSlicerPointToLineRegistrationModulePrivate
+class qSlicerLinesIntersectionModulePrivate
 {
 public:
-  qSlicerPointToLineRegistrationModulePrivate();
+  qSlicerLinesIntersectionModulePrivate();
 };
 
 //-----------------------------------------------------------------------------
-// qSlicerPointToLineRegistrationModulePrivate methods
+// qSlicerLinesIntersectionModulePrivate methods
 
 //-----------------------------------------------------------------------------
-qSlicerPointToLineRegistrationModulePrivate::qSlicerPointToLineRegistrationModulePrivate()
+qSlicerLinesIntersectionModulePrivate::qSlicerLinesIntersectionModulePrivate()
 {
 }
 
 //-----------------------------------------------------------------------------
-// qSlicerPointToLineRegistrationModule methods
+// qSlicerLinesIntersectionModule methods
 
 //-----------------------------------------------------------------------------
-qSlicerPointToLineRegistrationModule::qSlicerPointToLineRegistrationModule(QObject* _parent)
+qSlicerLinesIntersectionModule::qSlicerLinesIntersectionModule(QObject* _parent)
   : Superclass(_parent)
-  , d_ptr(new qSlicerPointToLineRegistrationModulePrivate)
+  , d_ptr(new qSlicerLinesIntersectionModulePrivate)
 {
   this->setWidgetRepresentationCreationEnabled(false);
 }
 
 //-----------------------------------------------------------------------------
-qSlicerPointToLineRegistrationModule::~qSlicerPointToLineRegistrationModule()
+qSlicerLinesIntersectionModule::~qSlicerLinesIntersectionModule()
 {
 }
 
 //-----------------------------------------------------------------------------
-QString qSlicerPointToLineRegistrationModule::helpText() const
+QString qSlicerLinesIntersectionModule::helpText() const
 {
-  return "This is a hidden loadable module that contains a point to line registration algorithm";
+  return "This is a hidden loadable module that contains a lines intersection algorithm";
 }
 
 //-----------------------------------------------------------------------------
-QString qSlicerPointToLineRegistrationModule::acknowledgementText() const
+QString qSlicerLinesIntersectionModule::acknowledgementText() const
 {
-  return "The algorithm was implemented by Elvis Chen (Robarts Research Institute). This extension was created by Leah Groves (Robarts Research Institute), with help from Adam Rankin (Robarts Research Institute)";
+  return "The algorithm was implemented by Elvis Chen (Robarts Research Institute). This extension was created by Adam Rankin (Robarts Research Institute)";
 }
 
 //-----------------------------------------------------------------------------
-QStringList qSlicerPointToLineRegistrationModule::contributors() const
+QStringList qSlicerLinesIntersectionModule::contributors() const
 {
   QStringList moduleContributors;
-  moduleContributors << QString("Elvis Chen (Robarts Research Institute)")
-                     << QString("Leah Groves (Robarts Research Institute)")
-                     << QString("Adam Rankin (Robarts Research Institute)");
+  moduleContributors << QString("Adam Rankin (Robarts Research Institute)")
+                     << QString("Elvis Chen (Robarts Research Institute)");
   return moduleContributors;
 }
 
 //-----------------------------------------------------------------------------
-QIcon qSlicerPointToLineRegistrationModule::icon() const
+QIcon qSlicerLinesIntersectionModule::icon() const
 {
-  return QIcon(":/Icons/PointToLineRegistration.png");
+  return QIcon(":/Icons/LinesIntersection.png");
 }
 
 //-----------------------------------------------------------------------------
-QStringList qSlicerPointToLineRegistrationModule::categories() const
+QStringList qSlicerLinesIntersectionModule::categories() const
 {
-  return QStringList() << "Registration";
+  return QStringList() << "Geometry";
 }
 
 //-----------------------------------------------------------------------------
-QStringList qSlicerPointToLineRegistrationModule::dependencies() const
+QStringList qSlicerLinesIntersectionModule::dependencies() const
 {
   return QStringList();
 }
 
 //-----------------------------------------------------------------------------
-void qSlicerPointToLineRegistrationModule::setup()
+void qSlicerLinesIntersectionModule::setup()
 {
   this->Superclass::setup();
 }
 
 //-----------------------------------------------------------------------------
-qSlicerAbstractModuleRepresentation* qSlicerPointToLineRegistrationModule
+qSlicerAbstractModuleRepresentation* qSlicerLinesIntersectionModule
 ::createWidgetRepresentation()
 {
-  return new qSlicerPointToLineRegistrationModuleWidget;
+  return new qSlicerLinesIntersectionModuleWidget;
 }
 
 //-----------------------------------------------------------------------------
-vtkMRMLAbstractLogic* qSlicerPointToLineRegistrationModule::createLogic()
+vtkMRMLAbstractLogic* qSlicerLinesIntersectionModule::createLogic()
 {
-  return vtkSlicerPointToLineRegistrationLogic::New();
+  return vtkSlicerLinesIntersectionLogic::New();
 }

@@ -15,19 +15,19 @@
 
 ==============================================================================*/
 
-#ifndef __qSlicerPointToLineRegistrationModule_h
-#define __qSlicerPointToLineRegistrationModule_h
+#ifndef __qSlicerLinesIntersectionModule_h
+#define __qSlicerLinesIntersectionModule_h
 
 // SlicerQt includes
 #include "qSlicerLoadableModule.h"
 
-#include "qSlicerPointToLineRegistrationModuleExport.h"
+#include "qSlicerLinesIntersectionModuleExport.h"
 
-class qSlicerPointToLineRegistrationModulePrivate;
+class qSlicerLinesIntersectionModulePrivate;
 
 /// \ingroup Slicer_QtModules_ExtensionTemplate
-class Q_SLICER_QTMODULES_POINTTOLINEREGISTRATION_EXPORT
-  qSlicerPointToLineRegistrationModule
+class Q_SLICER_QTMODULES_LINESINTERSECTION_EXPORT
+qSlicerLinesIntersectionModule
   : public qSlicerLoadableModule
 {
   Q_OBJECT
@@ -39,8 +39,8 @@ class Q_SLICER_QTMODULES_POINTTOLINEREGISTRATION_EXPORT
 public:
 
   typedef qSlicerLoadableModule Superclass;
-  explicit qSlicerPointToLineRegistrationModule(QObject* parent = 0);
-  virtual ~qSlicerPointToLineRegistrationModule();
+  explicit qSlicerLinesIntersectionModule(QObject *parent=0);
+  virtual ~qSlicerLinesIntersectionModule();
 
   qSlicerGetTitleMacro(QTMODULE_TITLE);
 
@@ -61,17 +61,17 @@ protected:
   virtual void setup();
 
   /// Create and return the widget representation associated to this module
-  virtual qSlicerAbstractModuleRepresentation* createWidgetRepresentation();
+  virtual qSlicerAbstractModuleRepresentation * createWidgetRepresentation();
 
   /// Create and return the logic associated to this module
   virtual vtkMRMLAbstractLogic* createLogic();
 
 protected:
-  QScopedPointer<qSlicerPointToLineRegistrationModulePrivate> d_ptr;
+  QScopedPointer<qSlicerLinesIntersectionModulePrivate> d_ptr;
 
 private:
-  Q_DECLARE_PRIVATE(qSlicerPointToLineRegistrationModule);
-  Q_DISABLE_COPY(qSlicerPointToLineRegistrationModule);
+  Q_DECLARE_PRIVATE(qSlicerLinesIntersectionModule);
+  Q_DISABLE_COPY(qSlicerLinesIntersectionModule);
 
 };
 

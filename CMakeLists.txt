@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(VASSTRegistration)
+project(VASSTAlgorithms)
 
 #-----------------------------------------------------------------------------
 # Extension meta-information
-set(EXTENSION_HOMEPAGE "http://slicer.org/slicerWiki/index.php/Documentation/Nightly/Extensions/VASSTRegistrationAlgo")
+set(EXTENSION_HOMEPAGE "https://github.com/VASST/VASSTAlgorithms")
 set(EXTENSION_CATEGORY "Registration")
 set(EXTENSION_CONTRIBUTORS "Adam Rankin (Robarts Research Institute), Elvis Chen (Robarts Research Institute)")
 set(EXTENSION_DESCRIPTION "This extension contains logic modules for registration algorithms.")
-set(EXTENSION_ICONURL "http://www.example.com/Slicer/Extensions/VASSTRegistrationAlgo.png")
+set(EXTENSION_ICONURL "https://github.com/VASST/VASSTAlgorithms/blob/master/VASSTRegistration.png")
 set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/VASSTRegistrationAlgo/Screenshots/1.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a space separated string, a list or 'NA' if any
 
@@ -20,6 +20,7 @@ include(${Slicer_USE_FILE})
 #-----------------------------------------------------------------------------
 # Extension modules
 add_subdirectory(PointToLineRegistration)
+add_subdirectory(LinesIntersection)
 ## NEXT_MODULE
 
 #-----------------------------------------------------------------------------

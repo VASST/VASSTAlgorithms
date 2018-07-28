@@ -1,5 +1,5 @@
 project(vtkSlicer${MODULE_NAME}ModuleLogic)
- 
+
 #-----------------------------------------------------------------------------
 set(KIT ${PROJECT_NAME})
 
@@ -11,13 +11,12 @@ set(${KIT}_INCLUDE_DIRECTORIES
 set(${KIT}_SRCS
   vtkSlicer${MODULE_NAME}Logic.cxx
   vtkSlicer${MODULE_NAME}Logic.h
-  vtkPointToLineRegistration.cpp
-  vtkPointToLineRegistration.h
   )
 
 set(${KIT}_TARGET_LIBRARIES
+  ${ITK_LIBRARIES}
   )
- 
+
 #-----------------------------------------------------------------------------
 SlicerMacroBuildModuleLogic(
   NAME ${KIT}
