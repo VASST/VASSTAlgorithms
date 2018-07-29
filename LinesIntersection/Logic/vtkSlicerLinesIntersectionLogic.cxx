@@ -108,6 +108,12 @@ void vtkSlicerLinesIntersectionLogic::Reset()
 }
 
 //----------------------------------------------------------------------------
+vtkSlicerLinesIntersectionLogic::vtkSlicerLinesIntersectionLogic::VectorType::size_type vtkSlicerLinesIntersectionLogic::Count()
+{
+  return this->LineOrigins.size();
+}
+
+//----------------------------------------------------------------------------
 double* vtkSlicerLinesIntersectionLogic::Update()
 {
   // compute the common line intersection among n lines

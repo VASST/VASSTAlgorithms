@@ -45,6 +45,7 @@ public:
 
   bool AddLine(double origin[3], double direction[3]);
   void Reset();
+  VectorType::size_type Count();
 
   double* Update() VTK_SIZEHINT(3);
   double* GetResult() VTK_SIZEHINT(3);
