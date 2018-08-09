@@ -77,7 +77,7 @@ double vtkSlicerLinesIntersectionLogic::PointToLineDistance(const vnl_double_3x1
   // equation 8
   vnl_matrix<double> temp = (origin - point).transpose() * (I - direction * direction.transpose()) * (origin - point); // for efficiency, assuming n is normalized already
 
-  return(sqrt(temp[0][0]));
+  return (sqrt(temp[0][0]));
 }
 
 //----------------------------------------------------------------------------
@@ -108,7 +108,7 @@ void vtkSlicerLinesIntersectionLogic::Reset()
 }
 
 //----------------------------------------------------------------------------
-vtkSlicerLinesIntersectionLogic::vtkSlicerLinesIntersectionLogic::VectorType::size_type vtkSlicerLinesIntersectionLogic::Count()
+unsigned int vtkSlicerLinesIntersectionLogic::Count()
 {
   return this->LineOrigins.size();
 }
