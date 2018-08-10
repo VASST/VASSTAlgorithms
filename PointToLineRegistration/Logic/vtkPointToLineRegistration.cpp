@@ -72,6 +72,7 @@ vtkStandardNewMacro(vtkPointToLineRegistration);
 vtkPointToLineRegistration::vtkPointToLineRegistration()
   : Tolerance(1e-4)
   , Error(0.0)
+  , LandmarkRegistrationMode(VTK_LANDMARK_RIGIDBODY)
 {
 }
 
