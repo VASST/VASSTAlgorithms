@@ -74,7 +74,7 @@ int vtkSlicerLinesIntersectionLogicTest1(int argc, char* argv [])
   {
     if (!AreSame(result[i], goldStandard[i]))
     {
-      std::cerr << "Matrices do not match." << std::endl << std::endl;
+      std::cerr << "Points do not match." << std::endl << std::endl;
       std::cerr << "Calculated: " << result[0] << "," << result[1] << "," << result[2] << std::endl;
       std::cerr << "Reference: " << goldStandard[0] << "," << goldStandard[1] << "," << goldStandard[2] << std::endl;
       return EXIT_FAILURE;
