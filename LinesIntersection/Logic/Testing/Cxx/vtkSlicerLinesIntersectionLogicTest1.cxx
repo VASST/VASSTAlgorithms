@@ -22,6 +22,9 @@
 #include <fstream>
 #include <limits>
 
+// OS includes
+#include <math.h>
+
 //-----------------------------------------------------------------------------
 bool AreSame(double a, double b)
 {

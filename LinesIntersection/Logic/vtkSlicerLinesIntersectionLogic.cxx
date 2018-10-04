@@ -35,16 +35,19 @@
 // STL includes
 #include <limits>
 
+// OS includes
+#include <math.h>
+
 namespace
 {
   bool AreSame(double a, double b)
   {
-    return std::fabs(a - b) < std::numeric_limits<double>::epsilon();
+    return fabs(a - b) < std::numeric_limits<double>::epsilon();
   }
 
   bool AreSame(float a, float b)
   {
-    return std::fabsf(a - b) < std::numeric_limits<float>::epsilon();
+    return fabsf(a - b) < std::numeric_limits<float>::epsilon();
   }
 }
 

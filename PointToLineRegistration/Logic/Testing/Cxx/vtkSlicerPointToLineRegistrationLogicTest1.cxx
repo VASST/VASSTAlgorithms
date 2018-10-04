@@ -20,13 +20,15 @@
 
 // STL includes
 #include <fstream>
+#include <limits>
 
-#define EPSILON 0.0001
+// OS includes
+#include <math.h>
 
 //-----------------------------------------------------------------------------
 bool AreSame(double a, double b)
 {
-  return fabs(a - b) < EPSILON;
+  return fabs(a - b) < std::numeric_limits<double>::epsilon();
 }
 
 //-----------------------------------------------------------------------------
