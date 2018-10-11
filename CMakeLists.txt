@@ -8,7 +8,7 @@ set(EXTENSION_HOMEPAGE "https://github.com/VASST/VASSTAlgorithms")
 set(EXTENSION_CATEGORY "Registration")
 set(EXTENSION_CONTRIBUTORS "Adam Rankin (Robarts Research Institute), Elvis Chen (Robarts Research Institute)")
 set(EXTENSION_DESCRIPTION "This extension contains logic modules for registration algorithms.")
-set(EXTENSION_ICONURL "https://github.com/VASST/VASSTAlgorithms/blob/master/VASSTRegistration.png")
+set(EXTENSION_ICONURL "https://github.com/VASST/VASSTAlgorithms/raw/master/VASSTAlgorithms.png") 
 set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/VASSTRegistrationAlgo/Screenshots/1.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a space separated string, a list or 'NA' if any
 
