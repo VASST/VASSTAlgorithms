@@ -89,7 +89,7 @@ int vtkSlicerPointToLineRegistrationLogicTest1(int argc, char* argv [])
   {
     std::stringstream ss;
     ss << line;
-    float row[4];
+    double row[4];
     ss >> row[0] >> row[1] >> row[2] >> row[3];
     goldStandard->SetElement(i, 0, row[0]);
     goldStandard->SetElement(i, 1, row[1]);
@@ -105,6 +105,8 @@ int vtkSlicerPointToLineRegistrationLogicTest1(int argc, char* argv [])
   {
     if (!AreSame(calculatedResult->GetData()[i], goldStandard->GetData()[i]))
     {
+      std::cerr << std::fixed << std::setprecision(20) << calculatedResult->GetData()[i] << std::endl;
+      std::cerr << goldStandard->GetData()[i] << std::endl;
       std::cerr << "Matrices do not match." << std::endl << std::endl;
       std::cerr << "Calculated: " << std::endl;
       calculatedResult->PrintSelf(std::cerr, vtkIndent());
