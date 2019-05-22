@@ -34,6 +34,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 // VNL includes
 #include <vnl/vnl_matrix.h>
 
+// Eigen includes
+#include VTK_EIGEN(Dense)
+#include VTK_EIGEN(SVD)
+using namespace vtkeigen;
 
 //----------------------------------------------------------------------------
 
@@ -61,6 +65,19 @@ namespace
       }
       matrix->SetElement(i, 3, t[i][0]);
     }
+  }
+
+  void EigenToMatrix4x4(Matrix3d& R, Matrix3d& S, Vector3d& t, vtkMatrix4x4* matrix)
+  {
+	  matrix->Identity();
+
+	  Matrix3d RS = R*S;
+	  for (int i = 0; i < 3; i++) {
+		  for (int j = 0; j < 3; j++) {
+			  matrix->SetElement(i, j, RS(i, j));
+		  }
+		  matrix->SetElement(i, 3, t(i));
+	  }
   }
 }
 
@@ -166,92 +183,129 @@ vtkMatrix4x4* vtkPointToLineRegistration::Compute()
 
   // assume column vector
   const sizeType n = this->Points.size();
-  vnl_matrix<double> e(1, n, 1.0);
   double outError = std::numeric_limits<double>::infinity();
-  vnl_matrix<double> E_old(3, n, 1.0);
-  E_old = E_old * 1000.0;
-  vnl_matrix<double> E(3, n, 0.0);
 
-  vnl_matrix<double> O(3, n);
-  vnl_matrix<double> X(3, n);
-  vnl_matrix<double> Y(3, n);
-  vnl_matrix<double> D(3, n);
-  for (sizeType i = 0; i < this->Points.size(); ++i)
-  {
-    X[0][i] = this->Points[i].GetX();
-    X[1][i] = this->Points[i].GetY();
-    X[2][i] = this->Points[i].GetZ();
+  if (this->LandmarkRegistrationMode == VTK_POINTTOLINE_ANISOTROPIC) {
 
-    O[0][i] = this->Lines[i].first.GetX();
-    O[1][i] = this->Lines[i].first.GetY();
-    O[2][i] = this->Lines[i].first.GetZ();
+	MatrixXd O(3, n);
+	MatrixXd X(3, n);
+	MatrixXd D(3, n);
+	for (sizeType i = 0; i < this->Points.size(); ++i)
+	{
+		X(0,i) = this->Points[i].GetX();
+		X(1,i) = this->Points[i].GetY();
+		X(2,i) = this->Points[i].GetZ();
 
-    D[0][i] = this->Lines[i].second.GetX();
-    D[1][i] = this->Lines[i].second.GetY();
-    D[2][i] = this->Lines[i].second.GetZ();
+		O(0,i) = this->Lines[i].first.GetX();
+		O(1,i) = this->Lines[i].first.GetY();
+		O(2,i) = this->Lines[i].first.GetZ();
 
-    Y[0][i] = this->Lines[i].first.GetX() + this->Lines[i].second.GetX();
-    Y[1][i] = this->Lines[i].first.GetY() + this->Lines[i].second.GetY();
-    Y[2][i] = this->Lines[i].first.GetZ() + this->Lines[i].second.GetZ();
+		D(0,i) = this->Lines[i].second.GetX();
+		D(1,i) = this->Lines[i].second.GetY();
+		D(2,i) = this->Lines[i].second.GetZ();
+
+	}
+	Matrix3d S = MatrixXd::Identity(3, 3);
+	Matrix3d R = MatrixXd::Identity(3, 3);
+	Vector3d t(3, 1, 0.0);
+	  
+	outError = anisotropicPoint2Line(X, O, D, Tolerance, R, S, t);
+	this->Error = outError;
+	  
+	EigenToMatrix4x4(R, S, t, matrix);
+
+	return matrix;
   }
-
-  vnl_matrix<double> d(1, n);
-  vnl_matrix<double> tempM;
-  vnl_matrix<double> R(3, 3);
-  R.set_identity();
-  vnl_matrix<double> t(3, 1, 0.0);
-
-  vtkNew<vtkLandmarkTransform> landmarkRegistration;
-  landmarkRegistration->SetMode(this->LandmarkRegistrationMode);
-
-  vtkNew<vtkPoints> source;
-  vtkNew<vtkPoints> target;
-  vtkNew<vtkMatrix4x4> result;
-  while (outError > this->Tolerance)
+  else 
   {
-    source->Reset();
-    target->Reset();
-    for (unsigned int i = 0; i < X.columns(); ++i)
-    {
-      source->InsertNextPoint(X[0][i], X[1][i], X[2][i]);
-      target->InsertNextPoint(Y[0][i], Y[1][i], Y[2][i]);
-    }
-    landmarkRegistration->SetSourceLandmarks(source);
-    landmarkRegistration->SetTargetLandmarks(target);
-    landmarkRegistration->Update();
-    landmarkRegistration->GetMatrix(result);
-    Matrix4x4ToVNL(result, R, t);
+	  vnl_matrix<double> e(1, n, 1.0);
+	  vnl_matrix<double> E_old(3, n, 1.0);
+	  E_old = E_old * 1000.0;
+	  vnl_matrix<double> E(3, n, 0.0);
 
-    tempM = (R * X) + (t * e) - O;
-    for (std::vector<vtkVector3d>::size_type i = 0; i < this->Points.size(); ++i)
-    {
-      d[0][i] = tempM[0][i] * D[0][i] + tempM[1][i] * D[1][i] + tempM[2][i] * D[2][i];
-    }
+	  vnl_matrix<double> O(3, n);
+	  vnl_matrix<double> X(3, n);
+	  vnl_matrix<double> Y(3, n);
+	  vnl_matrix<double> D(3, n);
+	  for (sizeType i = 0; i < this->Points.size(); ++i)
+	  {
+		  X[0][i] = this->Points[i].GetX();
+		  X[1][i] = this->Points[i].GetY();
+		  X[2][i] = this->Points[i].GetZ();
 
-    for (int i = 0; i < n; i++)
-    {
-      for (int j = 0; j < 3; j++)
-      {
-        Y[j][i] = O[j][i] + d[0][i] * D[j][i];
-      }
-    }
+		  O[0][i] = this->Lines[i].first.GetX();
+		  O[1][i] = this->Lines[i].first.GetY();
+		  O[2][i] = this->Lines[i].first.GetZ();
 
-    E = Y - (R * X) - (t * e);
-    outError = (E - E_old).frobenius_norm();
-    E_old = E;
+		  D[0][i] = this->Lines[i].second.GetX();
+		  D[1][i] = this->Lines[i].second.GetY();
+		  D[2][i] = this->Lines[i].second.GetZ();
+
+		  Y[0][i] = this->Lines[i].first.GetX() + this->Lines[i].second.GetX();
+		  Y[1][i] = this->Lines[i].first.GetY() + this->Lines[i].second.GetY();
+		  Y[2][i] = this->Lines[i].first.GetZ() + this->Lines[i].second.GetZ();
+	  }
+
+	  vnl_matrix<double> d(1, n);
+	  vnl_matrix<double> tempM;
+	  vnl_matrix<double> R(3, 3);
+	  R.set_identity();
+	  vnl_matrix<double> t(3, 1, 0.0);
+
+
+	  vtkNew<vtkLandmarkTransform> landmarkRegistration;
+	  landmarkRegistration->SetMode(this->LandmarkRegistrationMode);
+
+	  vtkNew<vtkPoints> source;
+	  vtkNew<vtkPoints> target;
+	  vtkNew<vtkMatrix4x4> result;
+	  while (outError > this->Tolerance)
+	  {
+		  source->Reset();
+		  target->Reset();
+		  for (unsigned int i = 0; i < X.columns(); ++i)
+		  {
+			  source->InsertNextPoint(X[0][i], X[1][i], X[2][i]);
+			  target->InsertNextPoint(Y[0][i], Y[1][i], Y[2][i]);
+		  }
+		  landmarkRegistration->SetSourceLandmarks(source);
+		  landmarkRegistration->SetTargetLandmarks(target);
+		  landmarkRegistration->Update();
+		  landmarkRegistration->GetMatrix(result);
+		  Matrix4x4ToVNL(result, R, t);
+
+		  tempM = (R * X) + (t * e) - O;
+		  for (std::vector<vtkVector3d>::size_type i = 0; i < this->Points.size(); ++i)
+		  {
+			  d[0][i] = tempM[0][i] * D[0][i] + tempM[1][i] * D[1][i] + tempM[2][i] * D[2][i];
+		  }
+
+		  for (int i = 0; i < n; i++)
+		  {
+			  for (int j = 0; j < 3; j++)
+			  {
+				  Y[j][i] = O[j][i] + d[0][i] * D[j][i];
+			  }
+		  }
+
+		  E = Y - (R * X) - (t * e);
+		  outError = (E - E_old).frobenius_norm();
+		  E_old = E;
+	  }
+
+
+	  // compute the Euclidean distance between points and lines
+	  outError = 0.0;
+	  for (unsigned int i = 0; i < E.columns(); i++)
+	  {
+		  outError += std::sqrt(E[0][i] * E[0][i] + E[1][i] * E[1][i] + E[2][i] * E[2][i]);
+	  }
+	  this->Error = outError / E.columns();
+
+	  VNLToMatrix4x4(R, t, matrix);
+
+	  return matrix;
   }
-
-  // compute the Euclidean distance between points and lines
-  outError = 0.0;
-  for (unsigned int i = 0; i < E.columns(); i++)
-  {
-    outError += std::sqrt(E[0][i] * E[0][i] + E[1][i] * E[1][i] + E[2][i] * E[2][i]);
-  }
-  this->Error = outError / E.columns();
-
-  VNLToMatrix4x4(R, t, matrix);
-
-  return matrix;
 }
 
 //----------------------------------------------------------------------------
@@ -282,4 +336,99 @@ void vtkPointToLineRegistration::SetLandmarkRegistrationModeToAffine()
 void vtkPointToLineRegistration::SetLandmarkRegistrationModeToSimilarity()
 {
   this->LandmarkRegistrationMode = VTK_LANDMARK_SIMILARITY;
+}
+
+//----------------------------------------------------------------------------
+void vtkPointToLineRegistration::SetLandmarkRegistrationModeToAnisotropic()
+{
+	this->LandmarkRegistrationMode = VTK_POINTTOLINE_ANISOTROPIC;
+}
+
+//----------------------------------------------------------------------------
+void vtkPointToLineRegistration::closestPointOnLine(const Vector3d &x, const Vector3d &o, const Vector3d &n, Vector3d &y)
+{
+	y = o - (o - x).dot(n) / n.squaredNorm() * n;
+}
+
+//----------------------------------------------------------------------------
+double vtkPointToLineRegistration::anisotropicPoint2Line(const MatrixXd &X, const MatrixXd &O, const MatrixXd &D, const double tol, Matrix3d &R, Matrix3d &S, Vector3d &t)
+{
+	// make sure we are working with 3xn matrices (column vectors in 3D)
+	assert(X.rows() == 3);
+	assert(O.rows() == 3);
+	assert(D.rows() == 3);
+	assert(X.cols() == O.cols());
+	assert(X.cols() == D.cols());
+
+	int n = X.cols();
+	MatrixXd e = MatrixXd::Ones(n, 1);
+	MatrixXd II = MatrixXd::Identity(n, n) - ((1.0 / double(n))*(e*e.transpose()));
+	Matrix3d d = Matrix3d::Identity(); d(2, 2) = -1.0;
+
+	// initialization, but not needed
+	R = S = Matrix3d::Identity();
+	t = Vector3d::Zero();
+
+	MatrixXd Y(3, n); // initialization
+	Vector3d y;
+	for (int i = 0; i < n; i++)
+	{
+		closestPointOnLine(X.col(i), O.col(i), D.col(i), y);
+		Y.col(i) = y;
+	}
+
+	double err = std::numeric_limits<double>::infinity();
+	MatrixXd E_old_outside = MatrixXd::Constant(3, n, err), E_outside;
+	while (err > tol)
+	{
+		// AOPA_Major
+		MatrixXd mX = (X*II).colwise().normalized();
+		MatrixXd mY = (Y*II);
+		MatrixXd B = mY*mX.transpose();
+
+		JacobiSVD<MatrixXd> svd(B, ComputeThinU | ComputeThinV);
+		R = svd.matrixU()*svd.matrixV().transpose();
+		if (R.determinant() < 0.0)
+		{
+			R = svd.matrixU()*d*svd.matrixV().transpose();
+		}
+		double err2 = std::numeric_limits<double>::infinity();
+		MatrixXd E_old = MatrixXd::Constant(3, n, err), E;
+
+		while (err2 > tol)
+		{
+			Eigen::JacobiSVD<MatrixXd> svd1(B*((R.transpose()*B).diagonal()).asDiagonal(), ComputeThinU | ComputeThinV);
+			R = svd1.matrixU()*svd1.matrixV().transpose();
+			if (R.determinant() < 0.0)
+			{
+				R = svd1.matrixU()*d*svd1.matrixV().transpose();
+			}
+			E = R*mX - mY;
+			err2 = (E - E_old).norm();
+			E_old = E;
+		}
+		B = Y*II*X.transpose();
+		S = ((B.transpose()*R).diagonal().array() / (X*II*X.transpose()).diagonal().array()).matrix().asDiagonal();
+
+		// in case of 2D to 3D registration, it may be necessary to fix the scale.
+		for (int i = 0; i < S.rows(); i++)
+			for (int j = 0; j < S.cols(); j++)
+				if (S.array().isNaN()(i, j))
+					S(i, j) = 1.0;
+		S(2, 2) = (S(0, 0) + S(1, 1)) * 0.5;
+		t = (Y - R*S*X).rowwise().mean();
+		// end of AOPA_Major
+
+		E = (R*S*X + t*MatrixXd::Ones(1, n) - O);
+		for (int i = 0; i < n; i++)
+		{
+			Y.col(i) = O.col(i) + D.col(i).dot(E.col(i))*D.col(i);
+		}
+
+		E_outside = Y - R*S*X - t*MatrixXd::Ones(1, n);
+		err = (E_outside - E_old_outside).norm();
+		E_old_outside = E_outside;
+	}
+
+	return(E_outside.norm());
 }
