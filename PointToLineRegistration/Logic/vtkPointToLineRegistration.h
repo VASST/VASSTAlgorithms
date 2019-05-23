@@ -42,6 +42,12 @@ class vtkVector3d;
 // STL includes
 #include <vector>
 
+// Eigen includes
+#include <vtk_eigen.h>
+#include <vtkeigen/eigen/Geometry>
+
+#define VTK_POINTTOLINE_ANISOTROPIC 70
+
 class VTK_SLICER_POINTTOLINEREGISTRATION_MODULE_LOGIC_EXPORT vtkPointToLineRegistration : public vtkObject
 {
   typedef std::pair<vtkVector3d, vtkVector3d> Line;
@@ -67,10 +73,16 @@ public:
   void SetLandmarkRegistrationModeToRigidBody();
   void SetLandmarkRegistrationModeToAffine();
   void SetLandmarkRegistrationModeToSimilarity();
+  void SetLandmarkRegistrationModeToAnisotropic();
 
 public:
   vtkPointToLineRegistration();
   ~vtkPointToLineRegistration();
+
+private:
+  void ClosestPointOnLine(const vtkeigen::Vector3d& x, const vtkeigen::Vector3d& o, const vtkeigen::Vector3d& n, vtkeigen::Vector3d& y);
+  double AnisotropicPoint2Line(const vtkeigen::MatrixXd& X, const vtkeigen::MatrixXd& O, const vtkeigen::MatrixXd& D, const double tol, vtkeigen::Matrix3d& R, vtkeigen::Matrix3d& S, vtkeigen::Vector3d& t);
+
 
 protected:
   int                       LandmarkRegistrationMode;

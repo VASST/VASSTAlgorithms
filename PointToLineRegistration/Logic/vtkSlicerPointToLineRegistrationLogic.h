@@ -63,6 +63,7 @@ public:
   void SetLandmarkRegistrationModeToRigidBody();
   void SetLandmarkRegistrationModeToAffine();
   void SetLandmarkRegistrationModeToSimilarity();
+  void SetLandmarkRegistrationModeToAnisotropic();
 
 protected:
   vtkSlicerPointToLineRegistrationLogic();

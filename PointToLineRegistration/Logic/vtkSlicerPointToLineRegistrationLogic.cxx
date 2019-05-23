@@ -117,6 +117,12 @@ void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToSimilar
   this->PointToLineRegistration->SetLandmarkRegistrationModeToSimilarity();
 }
 
+//----------------------------------------------------------------------------
+void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToAnisotropic()
+{
+  this->PointToLineRegistration->SetLandmarkRegistrationModeToAnisotropic();
+}
+
 //---------------------------------------------------------------------------
 void vtkSlicerPointToLineRegistrationLogic::SetMRMLSceneInternal(vtkMRMLScene* newScene)
 {
