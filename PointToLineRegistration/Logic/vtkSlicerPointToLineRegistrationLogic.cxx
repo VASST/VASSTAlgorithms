@@ -120,7 +120,7 @@ void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToSimilar
 //----------------------------------------------------------------------------
 void vtkSlicerPointToLineRegistrationLogic::SetLandmarkRegistrationModeToAnisotropic()
 {
-	this->PointToLineRegistration->SetLandmarkRegistrationModeToAnisotropic();
+  this->PointToLineRegistration->SetLandmarkRegistrationModeToAnisotropic();
 }
 
 //---------------------------------------------------------------------------
