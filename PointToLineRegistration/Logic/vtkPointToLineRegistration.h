@@ -42,13 +42,11 @@ class vtkVector3d;
 // STL includes
 #include <vector>
 
-//Eigen includes
+// Eigen includes
 #include <vtk_eigen.h>
-#include VTK_EIGEN(Geometry)
-
+#include <vtkeigen/eigen/Geometry>
 
 #define VTK_POINTTOLINE_ANISOTROPIC 70
-
 
 class VTK_SLICER_POINTTOLINEREGISTRATION_MODULE_LOGIC_EXPORT vtkPointToLineRegistration : public vtkObject
 {
@@ -82,8 +80,8 @@ public:
   ~vtkPointToLineRegistration();
 
 private:
-	void closestPointOnLine(const vtkeigen::Vector3d& x, const vtkeigen::Vector3d& o, const vtkeigen::Vector3d& n, vtkeigen::Vector3d& y);
-	double anisotropicPoint2Line(const vtkeigen::MatrixXd& X, const vtkeigen::MatrixXd& O, const vtkeigen::MatrixXd& D, const double tol, vtkeigen::Matrix3d& R, vtkeigen::Matrix3d& S, vtkeigen::Vector3d& t);
+  void ClosestPointOnLine(const vtkeigen::Vector3d& x, const vtkeigen::Vector3d& o, const vtkeigen::Vector3d& n, vtkeigen::Vector3d& y);
+  double AnisotropicPoint2Line(const vtkeigen::MatrixXd& X, const vtkeigen::MatrixXd& O, const vtkeigen::MatrixXd& D, const double tol, vtkeigen::Matrix3d& R, vtkeigen::Matrix3d& S, vtkeigen::Vector3d& t);
 
 
 protected:
