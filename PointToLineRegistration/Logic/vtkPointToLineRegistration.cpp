@@ -88,9 +88,9 @@ vtkStandardNewMacro(vtkPointToLineRegistration);
 
 //----------------------------------------------------------------------------
 vtkPointToLineRegistration::vtkPointToLineRegistration()
-  : Tolerance(1e-4)
+  : LandmarkRegistrationMode(VTK_LANDMARK_RIGIDBODY)
+  , Tolerance(1e-4)
   , Error(0.0)
-  , LandmarkRegistrationMode(VTK_LANDMARK_RIGIDBODY)
 {
 }
 
@@ -281,9 +281,9 @@ vtkMatrix4x4* vtkPointToLineRegistration::Compute()
         d[0][i] = tempM[0][i] * D[0][i] + tempM[1][i] * D[1][i] + tempM[2][i] * D[2][i];
       }
 
-      for (int i = 0; i < n; i++)
+      for (unsigned int i = 0; i < n; i++)
       {
-        for (int j = 0; j < 3; j++)
+        for (unsigned int j = 0; j < 3; j++)
         {
           Y[j][i] = O[j][i] + d[0][i] * D[j][i];
         }

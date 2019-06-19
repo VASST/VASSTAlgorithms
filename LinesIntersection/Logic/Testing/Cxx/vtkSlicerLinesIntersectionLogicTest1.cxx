@@ -16,6 +16,7 @@
 #include "vtkMRMLScene.h"
 
 // VTK includes
+#include <vtkMathUtilities.h>
 #include <vtkMatrix4x4.h>
 
 // STL includes
@@ -26,13 +27,7 @@
 #include <math.h>
 
 //-----------------------------------------------------------------------------
-bool AreSame(double a, double b)
-{
-  return fabs(a - b) < std::numeric_limits<double>::epsilon();
-}
-
-//-----------------------------------------------------------------------------
-int vtkSlicerLinesIntersectionLogicTest1(int argc, char* argv [])
+int vtkSlicerLinesIntersectionLogicTest1(int, char* [])
 {
   vtkNew<vtkMRMLScene> scene;
 
@@ -68,11 +63,10 @@ int vtkSlicerLinesIntersectionLogicTest1(int argc, char* argv [])
     std::cerr << "Test failed." << std::endl;
     return EXIT_FAILURE;
   }
-  double error = moduleLogic->GetError();
 
   for (int i = 0; i < 3; ++i)
   {
-    if (!AreSame(result[i], goldStandard[i]))
+    if (!vtkMathUtilities::FuzzyCompare(result[i], goldStandard[i]))
     {
       std::cerr << "Points do not match." << std::endl << std::endl;
       std::cerr << "Calculated: " << result[0] << "," << result[1] << "," << result[2] << std::endl;

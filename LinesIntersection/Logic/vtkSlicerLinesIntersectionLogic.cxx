@@ -24,6 +24,7 @@
 // VTK includes
 #include <vtkIntArray.h>
 #include <vtkNew.h>
+#include <vtkMathUtilities.h>
 #include <vtkMatrix3x3.h>
 #include <vtkObjectFactory.h>
 #include <vtkVector.h>
@@ -37,19 +38,6 @@
 
 // OS includes
 #include <math.h>
-
-namespace
-{
-  bool AreSame(double a, double b)
-  {
-    return fabs(a - b) < std::numeric_limits<double>::epsilon();
-  }
-
-  bool AreSame(float a, float b)
-  {
-    return fabsf(a - b) < std::numeric_limits<float>::epsilon();
-  }
-}
 
 //----------------------------------------------------------------------------
 vtkStandardNewMacro(vtkSlicerLinesIntersectionLogic);
@@ -138,9 +126,9 @@ double* vtkSlicerLinesIntersectionLogic::Update()
     for (VectorType::const_iterator next = std::next(first); next != this->LineDirections.end(); ++next)
     {
       // Compare directions
-      if (AreSame(*first[0][0], *next[0][0]) &&
-          AreSame(*first[1][0], *next[1][0]) &&
-          AreSame(*first[2][0], *next[2][0]))
+      if (vtkMathUtilities::FuzzyCompare(*first[0][0], *next[0][0]) &&
+          vtkMathUtilities::FuzzyCompare(*first[1][0], *next[1][0]) &&
+          vtkMathUtilities::FuzzyCompare(*first[2][0], *next[2][0]))
       {
         vtkErrorMacro("Parallel lines found. Algorithm cannot solve for parallel lines.");
         return nullptr;
