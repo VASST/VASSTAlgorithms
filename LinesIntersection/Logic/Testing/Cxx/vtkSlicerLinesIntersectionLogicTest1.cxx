@@ -63,7 +63,6 @@ int vtkSlicerLinesIntersectionLogicTest1(int, char* [])
     std::cerr << "Test failed." << std::endl;
     return EXIT_FAILURE;
   }
-  // double error = moduleLogic->GetError();
 
   for (int i = 0; i < 3; ++i)
   {
