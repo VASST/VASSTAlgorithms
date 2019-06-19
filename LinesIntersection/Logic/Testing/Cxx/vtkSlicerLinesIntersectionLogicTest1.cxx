@@ -32,7 +32,7 @@ bool AreSame(double a, double b)
 }
 
 //-----------------------------------------------------------------------------
-int vtkSlicerLinesIntersectionLogicTest1(int argc, char* argv [])
+int vtkSlicerLinesIntersectionLogicTest1(int, char* [])
 {
   vtkNew<vtkMRMLScene> scene;
 
@@ -68,7 +68,7 @@ int vtkSlicerLinesIntersectionLogicTest1(int argc, char* argv [])
     std::cerr << "Test failed." << std::endl;
     return EXIT_FAILURE;
   }
-  double error = moduleLogic->GetError();
+  // double error = moduleLogic->GetError();
 
   for (int i = 0; i < 3; ++i)
   {
