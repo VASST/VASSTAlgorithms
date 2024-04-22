@@ -9,7 +9,7 @@ set(EXTENSION_CATEGORY "Registration")
 set(EXTENSION_CONTRIBUTORS "Adam Rankin (Robarts Research Institute), Elvis Chen (Robarts Research Institute)")
 set(EXTENSION_DESCRIPTION "This extension contains logic modules for registration algorithms.")
 set(EXTENSION_ICONURL "https://github.com/VASST/VASSTAlgorithms/raw/master/VASSTAlgorithms.png") 
-set(EXTENSION_SCREENSHOTURLS "https://github.com/VASST/VASSTAlgorithms/raw/master/Screenshots/1.png")
+set(EXTENSION_SCREENSHOTURLS "https://github.com/VASST/VASSTAlgorithms/blob/master/VASSTAlgorithms.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a space separated string, a list or 'NA' if any
 
 #-----------------------------------------------------------------------------
