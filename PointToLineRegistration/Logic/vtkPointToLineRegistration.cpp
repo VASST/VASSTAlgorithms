@@ -38,6 +38,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <vtkeigen/eigen/Dense>
 #include <vtkeigen/eigen/SVD>
 
+// STD includes
+#include <iostream>
+
 //----------------------------------------------------------------------------
 
 namespace

@@ -20,6 +20,7 @@
 
 // STL includes
 #include <fstream>
+#include <iostream>
 #include <limits>
 
 // OS includes
